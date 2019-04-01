@@ -1,10 +1,10 @@
-package com.basic.proxy.dynamicproxy.order.controller;
+package com.basic.proxy.dynamic.order.controller;
 
-import com.basic.proxy.dynamicproxy.order.service.IOrderService;
-import com.basic.proxy.dynamicproxy.order.service.impl.OrderServiceImpl;
-import com.basic.proxy.dynamicproxy.common.ProxyFactory;
-import com.basic.proxy.dynamicproxy.common.TransactionalInvocationHandler;
-import com.basic.proxy.dynamicproxy.order.model.OrderDTO;
+import com.basic.proxy.dynamic.order.service.IOrderService;
+import com.basic.proxy.dynamic.order.service.impl.OrderServiceImpl;
+import com.basic.proxy.dynamic.common.ProxyFactory;
+import com.basic.proxy.dynamic.common.TransactionalInvocationHandler;
+import com.basic.proxy.dynamic.order.model.OrderDTO;
 
 /**
  * @author haodong.zhao

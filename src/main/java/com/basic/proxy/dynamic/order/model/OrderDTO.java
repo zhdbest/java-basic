@@ -1,4 +1,4 @@
-package com.basic.proxy.dynamicproxy.order.model;
+package com.basic.proxy.dynamic.order.model;
 
 /**
  * @author haodong.zhao

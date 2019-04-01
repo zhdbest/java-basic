@@ -1,6 +1,6 @@
-package com.basic.proxy.dynamicproxy.order.service;
+package com.basic.proxy.dynamic.order.service;
 
-import com.basic.proxy.dynamicproxy.order.model.OrderDTO;
+import com.basic.proxy.dynamic.order.model.OrderDTO;
 
 /**
  * @author haodong.zhao

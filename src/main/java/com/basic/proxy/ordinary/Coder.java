@@ -1,4 +1,4 @@
-package com.basic.proxy;
+package com.basic.proxy.ordinary;
 
 /**
  * @author haodong.zhao
