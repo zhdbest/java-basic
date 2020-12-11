@@ -1,11 +1,14 @@
 package com.hongmao.jdk.java.lang;
 
+import com.google.common.collect.Lists;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.time.Period;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * @author zhaohaodong
@@ -331,5 +334,190 @@ public class StringTest {
         System.out.println(str);
         System.out.println("截取索引位置1~3：" + str.substring(1, 3));
         System.out.println("截取索引位置2~5：" + str.substring(2, 5));
+    }
+
+    @Test
+    public void testSubSequence() {
+        String str = "123456";
+        System.out.println(str.subSequence(0, 3));
+    }
+
+    @Test
+    public void testConcat() {
+        String str1 = "123";
+        String str2 = "456";
+        System.out.println(str1.concat(str2));
+        System.out.println(str1);
+        System.out.println(str2);
+    }
+
+
+    @Test
+    public void testReplace() {
+        String str = "12345612";
+        String newStr = str.replace("12", "a");
+        System.out.println(newStr);
+        System.out.println(str);
+    }
+
+    @Test
+    public void testReplaceForChar() {
+        String str = "12345612";
+        String newStr = str.replace('1', 'a');
+        System.out.println(newStr);
+        System.out.println(str);
+    }
+
+    @Test
+    public void testMatches() {
+        System.out.println("b".matches("[a-z]"));
+        System.out.println("str".matches("[a-z]"));
+    }
+
+
+    @Test
+    public void testContains() {
+        String str = "123456";
+        System.out.println(str.contains("12"));
+        System.out.println(str.contains("61"));
+        System.out.println(str.contains(new StringBuilder("4")));
+        System.out.println(str.contains(new StringBuffer("5")));
+    }
+
+
+    @Test
+    public void testReplaceFirst() {
+        String str = "12345612";
+        System.out.println(str.replaceFirst("12", "a"));
+        String str2 = "abcdefab";
+        System.out.println(str2.replaceFirst("[a-c]", "2"));
+    }
+
+    @Test
+    public void testReplaceAll() {
+        System.out.println("12345612".replaceAll("12", "a"));
+        System.out.println("abcdefab".replaceAll("[a-c]", "2"));
+    }
+
+    @Test
+    public void testSplit() {
+        for (String str : "1,2,3,4,5,6".split(",", 0)) {
+            System.out.println(str);
+        }
+        System.out.println("*************");
+        for (String str : "1,2,3,4,5,6".split(",", 3)) {
+            System.out.println(str);
+        }
+        System.out.println("*************");
+        for (String str : "1,2,3,4,5,6".split(",", 8)) {
+            System.out.println(str);
+        }
+    }
+
+    @Test
+    public void testJoin1() {
+        System.out.println(String.join(",", "a", "b", "c"));
+    }
+
+    @Test
+    public void testJoin2() {
+        System.out.println(String.join(",", Lists.newArrayList("a", "b", "c")));
+    }
+
+    @Test
+    public void testToLowerCaseWithLocale() {
+        System.out.println("ABC12".toLowerCase(Locale.ROOT));
+        System.out.println("ABC12".toLowerCase(Locale.CHINA));
+    }
+
+    @Test
+    public void testToLowerCase() {
+        System.out.println("ABC12".toLowerCase());
+    }
+
+    @Test
+    public void testToUpperCaseWithLocale() {
+        System.out.println("Abc12".toUpperCase(Locale.ROOT));
+        System.out.println("Abc12".toUpperCase(Locale.CHINA));
+        System.out.println("Abc12".toUpperCase());
+    }
+
+    @Test
+    public void testTrim() {
+        String str = " 56  9 ";
+        System.out.println(str);
+        System.out.println(str.trim());
+
+        String str2 = "\n ab c ";
+        System.out.println(str2);
+        System.out.println(str2.trim());
+    }
+
+    @Test
+    public void testToCharArray() {
+        String str = "123456";
+        for (char c : str.toCharArray()) {
+            System.out.println(c);
+        }
+    }
+
+    @Test
+    public void testFormat() {
+        System.out.println(String.format("%s你好，我是%s，今年%d岁。", "Tom", "Jerry", 19));
+        System.out.println(String.format(Locale.CHINA, "%s你好，我是%s。", "Tom", "Jerry"));
+
+        System.out.println(String.format("%s你好，我是%s，今年%d岁。", "Tom", "Jerry"));
+    }
+
+    @Test
+    public void testValueOf() {
+        // 参数为对象，则判断该对象是否为空，为空则返回“null”，否则调用该对象的toString()方法
+        System.out.println(String.valueOf(new Object()));
+        Object obj = null;
+        System.out.println(String.valueOf(obj));
+        // 参数为char数组
+        System.out.println(String.valueOf(new char[]{'a', 'e', '8', '6'}));
+        // 参数为char数组的指定区域，（从哪个位置开始，截取几个元素）
+        char[] chars = new char[]{'a', 'e', '8', '6'};
+        System.out.println(String.valueOf(chars, 1, 2));
+        // 参数为布尔值
+        System.out.println(String.valueOf(true));
+        // 参数为字符
+        System.out.println(String.valueOf('x'));
+        // 参数为int
+        System.out.println(String.valueOf(5));
+        // 参数为long
+        System.out.println(String.valueOf(50L));
+        // 参数为float
+        System.out.println(String.valueOf(5.1f));
+        // 参数为double
+        System.out.println(String.valueOf(5.11d));
+    }
+
+
+    @Test
+    public void testCopyValueOf() {
+        char[] chars = new char[]{'a', 'e', '8', '6'};
+        System.out.println(String.copyValueOf(chars));
+        System.out.println(String.copyValueOf(chars, 1, 2));
+    }
+
+    @Test
+    public void testIntern() {
+        String str1 = "ab";
+        String str2 = new String("ab");
+        System.out.println(str1.equals(str2));
+        System.out.println(str1 == str2);
+        System.out.println(str1.intern() == str2);
+        System.out.println(str1 == str2.intern());
+
+        System.out.println("**********************************");
+
+        String str3 = new String("ab");
+        String str4 = new String("ab");
+        System.out.println(str3.equals(str4));
+        System.out.println(str3 == str4);
+        System.out.println(str3.intern() == str4);
+        System.out.println(str3 == str4.intern());
     }
 }
