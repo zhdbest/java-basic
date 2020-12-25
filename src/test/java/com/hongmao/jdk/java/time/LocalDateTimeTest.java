@@ -452,6 +452,9 @@ public class LocalDateTimeTest {
                 .append(DateTimeFormatter.ISO_LOCAL_TIME)
                 .toFormatter();
         System.out.println(now.format(dateTimeFormatter));
+
+        DateTimeFormatter std = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println(LocalDateTime.now().format(std));
     }
 
     @Test

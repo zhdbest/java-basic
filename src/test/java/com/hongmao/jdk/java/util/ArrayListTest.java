@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -46,25 +48,93 @@ public class ArrayListTest {
         list.ensureCapacity(20);
     }
 
-
-
-
-
-
-
-
-
-
-
-
     @Test
-    public void testToArray() {
-        System.out.println(5 >> 1);
+    public void testAddAll() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.addAll(list);
+        System.out.println(list);
     }
 
+    @Test
+    public void testListIterator() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        // 指定索引获取的迭代器，调用next方法会获得该索引位置的元素
+        System.out.println(list.listIterator(2).previous());
+        System.out.println(list.listIterator(2).next());
+        // 不指定索引，等同于指定的索引为0，也即从头开始
+        System.out.println(list.listIterator().hasPrevious());
+        System.out.println(list.listIterator().next());
+    }
 
+    @Test
+    public void testSubList() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        List<Integer> subList = list.subList(1, 3);
+        System.out.println(list);
+        System.out.println(subList);
+        System.out.println(subList.getClass());
+    }
 
+    @Test
+    public void testRemoveIf() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.removeIf(l -> l >1 && l < 4);
+        System.out.println(list);
+    }
 
+    @Test
+    public void testReplaceAll() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.replaceAll(i -> i * 5);
+        System.out.println(list);
+    }
 
+    @Test
+    public void testSort() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.sort(Comparator.comparingInt(i -> -i));
+        System.out.println(list);
+    }
 
+    @Test
+    public void testIterator() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        Iterator<Integer> iterator = list.iterator();
+        iterator.next();
+        iterator.next();
+        iterator.forEachRemaining(System.out::println);
+    }
 }
