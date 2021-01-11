@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
 
 /**
  * @author zhaohaodong
@@ -54,6 +55,7 @@ public class ArrayListTest {
         list.add(1);
         list.add(2);
         list.add(3);
+        // 本处为错误示例
         list.addAll(list);
         System.out.println(list);
     }
@@ -137,4 +139,46 @@ public class ArrayListTest {
         iterator.next();
         iterator.forEachRemaining(System.out::println);
     }
+
+    @Test
+    public void testSpliterator() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        System.out.println(list.spliterator());
+    }
+
+    /**
+     * 如下为ArrayList内部类ArrayListSpliterator相关测试
+     */
+    @Test
+    public void testTrySplit() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        Spliterator<Integer> spliterator = list.spliterator();
+        Spliterator<Integer> spliterator1 = spliterator.trySplit();
+
+        System.out.println(spliterator);
+        System.out.println(spliterator1);
+
+        System.out.println("spliterator1 : ");
+        spliterator1.forEachRemaining(System.out::println);
+        System.out.println("spliterator : ");
+        spliterator.forEachRemaining(System.out::println);
+
+
+        Spliterator<Integer> spliterator2 = spliterator.trySplit();
+        System.out.println("spliterator2 : " + spliterator2);
+
+    }
+
+
 }
