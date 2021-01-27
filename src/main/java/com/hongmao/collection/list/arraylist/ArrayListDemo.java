@@ -1,4 +1,4 @@
-package com.hongmao.collocation.list.arraylist;
+package com.hongmao.collection.list.arraylist;
 
 import java.util.ArrayList;
 import java.util.List;

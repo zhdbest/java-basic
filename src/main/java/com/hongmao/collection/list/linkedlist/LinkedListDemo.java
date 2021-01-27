@@ -1,4 +1,4 @@
-package com.hongmao.collocation.list.linkedlist;
+package com.hongmao.collection.list.linkedlist;
 
 import java.util.LinkedList;
 import java.util.List;

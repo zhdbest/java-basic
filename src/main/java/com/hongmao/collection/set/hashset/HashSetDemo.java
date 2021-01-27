@@ -1,4 +1,4 @@
-package com.hongmao.collocation.set.hashset;
+package com.hongmao.collection.set.hashset;
 
 import java.util.HashSet;
 import java.util.Set;

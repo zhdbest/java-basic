@@ -151,9 +151,23 @@ public class ArrayListTest {
         System.out.println(list.spliterator());
     }
 
-    /**
-     * 如下为ArrayList内部类ArrayListSpliterator相关测试
-     */
+    /** 如下为ArrayList内部类ArrayListSpliterator相关测试 **/
+
+
+    @Test
+    public void testTryAdvance() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        Spliterator spliterator = list.spliterator();
+        spliterator.tryAdvance(System.out::println);
+
+    }
+
     @Test
     public void testTrySplit() {
         List<Integer> list = new ArrayList<>();
@@ -180,5 +194,43 @@ public class ArrayListTest {
 
     }
 
+    @Test
+    public void testCharacteristics() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
 
+        Spliterator<Integer> spliterator = list.spliterator();
+        System.out.println(spliterator.characteristics());
+    }
+
+    @Test
+    public void testGetExactSizeIfKnown() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        Spliterator<Integer> spliterator = list.spliterator();
+        System.out.println(spliterator.getExactSizeIfKnown());
+    }
+
+    @Test
+    public void testForEachRemaining() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        Spliterator<Integer> spliterator = list.spliterator();
+        spliterator.trySplit();
+        spliterator.forEachRemaining(System.out::println);
+    }
 }

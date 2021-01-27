@@ -1,4 +1,4 @@
-package com.hongmao.collocation.set.treeset;
+package com.hongmao.collection.set.treeset;
 
 import java.util.Set;
 import java.util.TreeSet;
