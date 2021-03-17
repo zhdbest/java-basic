@@ -233,4 +233,25 @@ public class ArrayListTest {
         spliterator.trySplit();
         spliterator.forEachRemaining(System.out::println);
     }
+
+    /* ArrayList的内部类SubList相关测试 Start */
+    @Test
+    public void testSubListSet() {
+        List<Integer> list = new ArrayList<>();
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        // SubList
+        List<Integer> subList = list.subList(1, 2);
+        subList.set(0, 100);
+        // 打印SubList
+        System.out.println(subList);
+        // 打印ArrayList，会发现修改了SubList中的元素，其父列表也会变更。
+        System.out.println(list);
+    }
+
+
+    /* ArrayList的内部类SubList相关测试 End */
+
 }
