@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -99,6 +100,23 @@ public class SerializableTest {
         Object o = objectInputStream.readObject();
         System.out.println(JSON.toJSONString(o));
     }
+
+    @Test
+    public void testSerializableClass5() throws Exception {
+        Fiction fiction = new Fiction();
+        fiction.setProtagonist("Jack");
+//        fiction.setName("xxx");
+        // 序列化
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        objectOutputStream.writeObject(fiction);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        // 反序列化
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
+        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+        Object o = objectInputStream.readObject();
+        System.out.println(JSON.toJSONString(o));
+    }
 }
 
 class Animal {
@@ -180,6 +198,34 @@ class Cat implements Serializable {
     private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         s.defaultReadObject();
         System.out.println("调用Cat.readObject");
+    }
+}
+
+class Book implements Serializable {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private void readObjectNoData() throws ObjectStreamException {
+        System.out.println("调用Book.readObjectNoData");
+    }
+}
+
+class Fiction extends Book implements Serializable {
+    private String protagonist;
+
+    public String getProtagonist() {
+        return protagonist;
+    }
+
+    public void setProtagonist(String protagonist) {
+        this.protagonist = protagonist;
     }
 }
 
