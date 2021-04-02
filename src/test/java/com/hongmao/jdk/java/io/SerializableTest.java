@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -105,15 +106,60 @@ public class SerializableTest {
     public void testSerializableClass5() throws Exception {
         Fiction fiction = new Fiction();
         fiction.setProtagonist("Jack");
-//        fiction.setName("xxx");
+        // 序列化
+//        FileOutputStream fileOutputStream = new FileOutputStream("fiction.txt");
+//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+//        objectOutputStream.writeObject(fiction);
+        // 反序列化
+        FileInputStream fileInputStream = new FileInputStream("fiction.txt");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        Object o = objectInputStream.readObject();
+        System.out.println(JSON.toJSONString(o));
+    }
+
+    @Test
+    public void testSerializableClass6() throws Exception {
+        Pig pig = new Pig();
+        pig.setWeight("6.8");
         // 序列化
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream.writeObject(fiction);
+        objectOutputStream.writeObject(pig);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         // 反序列化
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+        Object o = objectInputStream.readObject();
+        System.out.println(JSON.toJSONString(o));
+    }
+
+    @Test
+    public void testSerializableClass7() throws Exception {
+        People people = new People();
+        people.setName("Jack");
+        // 序列化
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        objectOutputStream.writeObject(people);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        // 反序列化
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
+        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+        Object o = objectInputStream.readObject();
+        System.out.println(JSON.toJSONString(o));
+    }
+
+    @Test
+    public void testSerializableClass8() throws Exception {
+        Computer computer = new Computer();
+        computer.setName("Dell");
+        // 序列化
+//        FileOutputStream fileOutputStream = new FileOutputStream("computer.txt");
+//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+//        objectOutputStream.writeObject(computer);
+        // 反序列化
+        FileInputStream fileInputStream = new FileInputStream("computer.txt");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         Object o = objectInputStream.readObject();
         System.out.println(JSON.toJSONString(o));
     }
@@ -229,3 +275,56 @@ class Fiction extends Book implements Serializable {
     }
 }
 
+class Pig implements Serializable {
+    private String weight;
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    private Object writeReplace() {
+        System.out.println("调用Pig.writeReplace");
+        Dog dog = new Dog();
+        dog.setWeight(new BigDecimal("7.1"));
+        return dog;
+    }
+}
+
+class People implements Serializable {
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private Object readResolve() {
+        System.out.println("调用People.readResolve");
+        Dog dog = new Dog();
+        dog.setWeight(new BigDecimal("9.9"));
+        return dog;
+    }
+}
+
+class Computer implements Serializable {
+
+    private static final long serialVersionUID = -2L;
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
